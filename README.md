@@ -1,2 +1,7 @@
-# manga-colourization
-This repository contains the code for the manga colourization project using Deep Learning.
+# Manga Colourization
+This repository contains the code for the Manga Colourization project using Deep Learning.
+
+TODO:
+* Implementation
+* Data
+* README
