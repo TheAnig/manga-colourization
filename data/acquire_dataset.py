@@ -14,10 +14,14 @@ count = 1
 for i in range(3000):
     stringreturn = urllib.request.urlopen(f"https://safebooru.org/index.php?page=dapi&s=post&q=index&tags=1girl%20solo&pid={str(i+84)}").read()
     xmlreturn = untangle.parse(stringreturn.decode())
-    print(f"{i}, {count}")
+#    print(f"{i}, {count}")
+    if i%300 == 0:
+        print("=================================================================")
+        print(f"{i/3000 * 100}% done..")
+        print("=================================================================")
     for post in xmlreturn.posts.post:
         imgurl = "https:" + post["sample_url"]
-        print(imgurl)
+        #print(imgurl)
         if ("png" in imgurl) or ("jpg" in imgurl):
 
             resp = urllib.request.urlopen(imgurl)
@@ -33,8 +37,9 @@ for i in range(3000):
                 scalefactor = (maxsize*1.0) / height
                 res = cv2.resize(image,(int(width * scalefactor), int(height*scalefactor)), interpolation = cv2.INTER_CUBIC)
                 center_x = int(round(width*scalefactor*0.5))
-                print(center_x)
+                #print(center_x)
                 cropped = res[0:maxsize,center_x - int(maxsize/2):center_x + int(maxsize/2)]
 
             count += 1
             cv2.imwrite("./manga_dataset/"+str(count)+".jpg",cropped)
+            
